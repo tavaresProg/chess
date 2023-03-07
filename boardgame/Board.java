@@ -3,13 +3,13 @@ package boardgame;
 public class Board {
 
     private int rows;
-    private int colums;
+    private int columns;
     private Piece[][] pieces;
 
-    public Board(int rows, int colums) {
+    public Board(int rows, int columns) {
         this.rows = rows;
-        this.colums = colums;
-        pieces = new Piece[rows][colums];
+        this.columns = columns;
+        pieces = new Piece[rows][columns];
     }
 
     public int getRows() {
@@ -17,6 +17,15 @@ public class Board {
     }
 
     public int getColums() {
-        return colums;
+        return columns;
     }
+
+    public Piece piece(int row, int colums) {
+        return pieces[row][colums];
+    }
+
+    public Piece piece(Position position) {
+        return pieces[position.getRow()][position.getColumn()];
+    }
+
 }
