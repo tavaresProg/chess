@@ -19,27 +19,27 @@ public class Board {
         return rows;
     }
 
-    public int getColums() {
+    public int getColumns() {
         return columns;
     }
 
-    public Piece piece(int row, int colums) {
-        if (!positionExists(row, colums)) {
-            throw new BoardException("Position off limits");
+    public Piece piece(int row, int column) {
+        if (!positionExists(row, column)) {
+            throw new BoardException("Position not on the board");
         }
-        return pieces[row][colums];
+        return pieces[row][column];
     }
 
     public Piece piece(Position position) {
         if (!positionExists(position)) {
-            throw new BoardException("Position off limits");
+            throw new BoardException("Position not on the board");
         }
         return pieces[position.getRow()][position.getColumn()];
     }
 
     public void placePiece(Piece piece, Position position) {
         if (thereIsAPiece(position)) {
-            throw new BoardException("There is already a piece in position " + position);
+            throw new BoardException("There is already a piece on position " + position);
         }
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
@@ -47,7 +47,7 @@ public class Board {
 
     public Piece removePiece(Position position) {
         if (!positionExists(position)) {
-            throw new BoardException("Position off limits");
+            throw new BoardException("Position not on the board");
         }
         if (piece(position) == null) {
             return null;
@@ -57,7 +57,6 @@ public class Board {
         pieces[position.getRow()][position.getColumn()] = null;
         return aux;
     }
-
 
     private boolean positionExists(int row, int column) {
         return row >= 0 && row < rows && column >= 0 && column < columns;
@@ -69,7 +68,7 @@ public class Board {
 
     public boolean thereIsAPiece(Position position) {
         if (!positionExists(position)) {
-            throw new BoardException("Position off limits");
+            throw new BoardException("Position not on the board");
         }
         return piece(position) != null;
     }
